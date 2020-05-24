@@ -3,8 +3,8 @@ package net.makeswift.utilities.support.data;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @DisplayName("A pair")
 public class PairTest {
@@ -34,6 +34,32 @@ public class PairTest {
         Pair<Object> pair = new Pair<>(first, second);
 
         assertEquals(anotherPair, pair);
+
+    }
+
+    @Test
+    @DisplayName("doesn't equals another pair with a different value at the first position")
+    public void doesntEqualAnotherPairWithADifferentValueAtTheFirstPosition() {
+
+        Object second = new Object();
+        Pair<Object> anotherPair = new Pair<>(new Object(), second);
+
+        Pair<Object> pair = new Pair<>(new Object(), second);
+
+        assertNotEquals(anotherPair, pair);
+
+    }
+
+    @Test
+    @DisplayName("doesn't equals another pair with a different value at the second position")
+    public void doesntEqualAnotherPairWithADifferentValueAtTheSecondPosition() {
+
+        Object first = new Object();
+        Pair<Object> anotherPair = new Pair<>(first, new Object());
+
+        Pair<Object> pair = new Pair<>(first, new Object());
+
+        assertNotEquals(anotherPair, pair);
 
     }
 

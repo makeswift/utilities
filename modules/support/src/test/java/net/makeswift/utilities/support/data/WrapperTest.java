@@ -3,8 +3,7 @@ package net.makeswift.utilities.support.data;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("A wrapper")
 public class WrapperTest {
@@ -31,6 +30,18 @@ public class WrapperTest {
         Wrapper<Object> wrapper = new Wrapper<>(value);
 
         assertEquals(anotherWrapper, wrapper);
+
+    }
+
+    @Test
+    @DisplayName("doesn't equals another wrapper with a different value")
+    public void doesntEqualAnotherWrapperWithADifferentValue() {
+
+        Wrapper<Object> anotherWrapper = new Wrapper<>(new Object());
+
+        Wrapper<Object> wrapper = new Wrapper<>(new Object());
+
+        assertNotEquals(anotherWrapper, wrapper);
 
     }
 

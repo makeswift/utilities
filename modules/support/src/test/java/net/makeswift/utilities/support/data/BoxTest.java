@@ -47,6 +47,18 @@ public class BoxTest {
     }
 
     @Test
+    @DisplayName("doesn't equals another box with a different value")
+    public void doesntEqualAnotherBoxWithADifferentValue() {
+
+        Box<Object> anotherBox = new Box<>(new Object());
+
+        Box<Object> box = new Box<>(new Object());
+
+        assertNotEquals(anotherBox, box);
+
+    }
+
+    @Test
     @DisplayName("has the same has value asa another box with the same value")
     public void hasTheSameHashValueAsAnotherBoxWithTheSameValue() {
 

@@ -3,8 +3,7 @@ package net.makeswift.utilities.support.data;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("A tuple")
 public class TupleTest {
@@ -34,6 +33,32 @@ public class TupleTest {
         Tuple<Object, Object> tuple = new Tuple<>(first, second);
 
         assertEquals(anotherTuple, tuple);
+
+    }
+
+    @Test
+    @DisplayName("doesn't equals another tuple with a different value at the first position")
+    public void doesntEqualAnotherTupleWithADifferentValueAtTheFirstPosition() {
+
+        Object second = new Object();
+        Tuple<Object, Object> anotherTuple = new Tuple<>(new Object(), second);
+
+        Tuple<Object, Object> tuple = new Tuple<>(new Object(), second);
+
+        assertNotEquals(anotherTuple, tuple);
+
+    }
+
+    @Test
+    @DisplayName("doesn't equals another tuple with a different value at the second position")
+    public void doesntEqualAnotherTupleWithADifferentValueAtTheSecondPosition() {
+
+        Object first = new Object();
+        Tuple<Object, Object> anotherTuple = new Tuple<>(first, new Object());
+
+        Tuple<Object, Object> tuple = new Tuple<>(first, new Object());
+
+        assertNotEquals(anotherTuple, tuple);
 
     }
 
