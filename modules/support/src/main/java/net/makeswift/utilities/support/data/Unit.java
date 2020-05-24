@@ -3,10 +3,13 @@ package net.makeswift.utilities.support.data;
 import net.makeswift.utilities.support.property.Property;
 import net.makeswift.utilities.support.property.PropertyHelper;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class Unit implements Cloneable, Comparable<Unit> {
+public class Unit implements Comparable<Unit>, Cloneable, Serializable {
+
+    private static final long serialVersionUID = -571480973265861585L;
 
     private static final List<Property<Unit>> PROPERTIES = Collections.emptyList();
 
@@ -35,13 +38,13 @@ public class Unit implements Cloneable, Comparable<Unit> {
     }
 
     @Override
-    protected Unit clone() {
-        return this;
+    public int compareTo(Unit other) {
+        return 0;
     }
 
     @Override
-    public int compareTo(Unit other) {
-        return 0;
+    public Unit clone() {
+        return this;
     }
 
 }

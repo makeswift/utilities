@@ -4,10 +4,13 @@ import net.makeswift.utilities.support.property.Property;
 import net.makeswift.utilities.support.property.PropertyHelper;
 import net.makeswift.utilities.support.property.SimpleProperty;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class Tuple<First, Second> implements Cloneable {
+public class Tuple<First, Second> implements Cloneable, Serializable {
+
+    private static final long serialVersionUID = -4461009431136919961L;
 
     private static final List<Property<Tuple<?, ?>>> PROPERTIES = Arrays.asList(
         new SimpleProperty<Tuple<?, ?>>("first", Tuple::getFirst),

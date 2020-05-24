@@ -4,13 +4,15 @@ import net.makeswift.utilities.support.property.Property;
 import net.makeswift.utilities.support.property.PropertyHelper;
 import net.makeswift.utilities.support.property.SimpleProperty;
 
-import java.util.Arrays;
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
-public class Wrapper<Value> implements Cloneable {
+public class Wrapper<Value> implements Cloneable, Serializable {
 
-    private static final List<Property<Wrapper<?>>> PROPERTIES = Arrays.asList(
+    private static final long serialVersionUID = 4354943973975212929L;
+
+    private static final List<Property<Wrapper<?>>> PROPERTIES = Collections.singletonList(
         new SimpleProperty<Wrapper<?>>("value", Wrapper::get)
     );
 

@@ -7,7 +7,8 @@
     <packaging>jar</packaging>
 
     <name>Makeswift Utilities - Support</name>
-    <description>Supporting helper classes, utils and methods that simplify common or tedious development tasks.</description>
+    <description>Supporting helper classes, utils and methods that simplify common or tedious development tasks.
+    </description>
 
     <parent>
         <groupId>net.makeswift.utilities</groupId>
