@@ -1,8 +1,18 @@
 package net.makeswift.utilities.support.data;
 
+import net.makeswift.utilities.support.property.Property;
+import net.makeswift.utilities.support.property.PropertyHelper;
+import net.makeswift.utilities.support.property.SimpleProperty;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Wrapper<Value> implements Cloneable {
+
+    private static final List<Property<Wrapper<?>>> PROPERTIES = Arrays.asList(
+        new SimpleProperty<Wrapper<?>>("value", Wrapper::get)
+    );
 
     private final Value value;
 
@@ -16,12 +26,17 @@ public class Wrapper<Value> implements Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(value);
+        return PropertyHelper.hashCode(this, PROPERTIES);
     }
 
     @Override
     public boolean equals(Object object) {
-        return object instanceof Wrapper && Objects.equals(value, ((Wrapper) object).value);
+        return PropertyHelper.equals(this, PROPERTIES, object);
+    }
+
+    @Override
+    public String toString() {
+        return PropertyHelper.toString(this, PROPERTIES);
     }
 
     @Override

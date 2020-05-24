@@ -1,8 +1,18 @@
 package net.makeswift.utilities.support.data;
 
-import java.util.Objects;
+import net.makeswift.utilities.support.property.Property;
+import net.makeswift.utilities.support.property.PropertyHelper;
+import net.makeswift.utilities.support.property.SimpleProperty;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Pair<Value> implements Cloneable {
+
+    private static final List<Property<Pair<?>>> PROPERTIES = Arrays.asList(
+        new SimpleProperty<Pair<?>>("first", Pair::getFirst),
+        new SimpleProperty<Pair<?>>("second", Pair::getSecond)
+    );
 
     private final Value first;
 
@@ -23,14 +33,17 @@ public class Pair<Value> implements Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(first, second);
+        return PropertyHelper.hashCode(this, PROPERTIES);
     }
 
     @Override
     public boolean equals(Object object) {
-        return object instanceof Pair
-            && Objects.equals(first, ((Pair) object).first)
-            && Objects.equals(second, ((Pair) object).second);
+        return PropertyHelper.equals(this, PROPERTIES, object);
+    }
+
+    @Override
+    public String toString() {
+        return PropertyHelper.toString(this, PROPERTIES);
     }
 
     @Override

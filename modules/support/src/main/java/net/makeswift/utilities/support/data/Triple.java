@@ -1,8 +1,19 @@
 package net.makeswift.utilities.support.data;
 
-import java.util.Objects;
+import net.makeswift.utilities.support.property.Property;
+import net.makeswift.utilities.support.property.PropertyHelper;
+import net.makeswift.utilities.support.property.SimpleProperty;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Triple<First, Second, Third> implements Cloneable {
+
+    private static final List<Property<Triple<?, ?, ?>>> PROPERTIES = Arrays.asList(
+        new SimpleProperty<Triple<?, ?, ?>>("first", Triple::getFirst),
+        new SimpleProperty<Triple<?, ?, ?>>("second", Triple::getSecond),
+        new SimpleProperty<Triple<?, ?, ?>>("third", Triple::getThird)
+    );
 
     private final First first;
 
@@ -30,15 +41,17 @@ public class Triple<First, Second, Third> implements Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(first, second, third);
+        return PropertyHelper.hashCode(this, PROPERTIES);
     }
 
     @Override
     public boolean equals(Object object) {
-        return object instanceof Triple
-            && Objects.equals(first, ((Triple) object).first)
-            && Objects.equals(second, ((Triple) object).second)
-            && Objects.equals(third, ((Triple) object).third);
+        return PropertyHelper.equals(this, PROPERTIES, object);
+    }
+
+    @Override
+    public String toString() {
+        return PropertyHelper.toString(this, PROPERTIES);
     }
 
     @Override
