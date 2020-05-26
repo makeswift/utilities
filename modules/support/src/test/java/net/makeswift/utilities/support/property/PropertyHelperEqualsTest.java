@@ -6,14 +6,45 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("The 'equals' property helper")
 public class PropertyHelperEqualsTest {
+
+
+    @Test
+    @DisplayName("fails if the passed entity is null")
+    public void failsIfThePassedEntityIsNull() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            PropertyHelper.equals(null, new LinkedList<>(), new Object());
+        });
+
+    }
+
+    @Test
+    @DisplayName("fails if the passed properties are null")
+    public void failsIfThePassedPropertiesAreNull() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            PropertyHelper.equals(new Object(), null, new Object());
+        });
+
+    }
+
+    @Test
+    @DisplayName("fails if the passed properties contain null")
+    public void failsIfThePassedPropertiesContainNull() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            PropertyHelper.equals(new Object(), Collections.singletonList(null), new Object());
+        });
+
+    }
 
     @Test
     @DisplayName("equates equal objects when properties are not present")
