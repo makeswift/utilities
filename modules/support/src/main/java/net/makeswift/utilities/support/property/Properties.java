@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class Properties<Entity> {
+public final class Properties<Entity> {
 
     private static final Properties<Properties<?>> PROPERTIES = new PropertiesBuilder<Properties<?>>()
         .add("properties", properties -> CollectionHelper.toString(properties.properties, Property::getName))

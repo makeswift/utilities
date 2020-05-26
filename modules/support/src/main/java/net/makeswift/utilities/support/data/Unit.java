@@ -5,7 +5,7 @@ import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
 
-public class Unit implements Comparable<Unit>, Cloneable, Serializable {
+public final class Unit implements Comparable<Unit>, Cloneable, Serializable {
 
     private static final long serialVersionUID = -571480973265861585L;
 

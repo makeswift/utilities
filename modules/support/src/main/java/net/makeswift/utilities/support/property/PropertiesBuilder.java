@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
-public class PropertiesBuilder<Entity> implements Builder<Properties<Entity>> {
+public final class PropertiesBuilder<Entity> implements Builder<Properties<Entity>> {
 
     private static final Properties<PropertiesBuilder<?>> PROPERTIES = new PropertiesBuilder<PropertiesBuilder<?>>()
         .add("properties", builder -> CollectionHelper.toString(builder.properties, Property::getName))

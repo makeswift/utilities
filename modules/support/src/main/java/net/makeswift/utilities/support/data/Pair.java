@@ -5,7 +5,7 @@ import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
 
-public class Pair<Value> implements Cloneable, Serializable {
+public final class Pair<Value> implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1844809987437199261L;
 

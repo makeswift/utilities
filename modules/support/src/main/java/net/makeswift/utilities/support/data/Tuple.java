@@ -5,7 +5,7 @@ import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
 
-public class Tuple<First, Second> implements Cloneable, Serializable {
+public final class Tuple<First, Second> implements Cloneable, Serializable {
 
     private static final long serialVersionUID = -4461009431136919961L;
 

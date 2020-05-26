@@ -5,7 +5,7 @@ import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
 
-public class Box<Value> implements Cloneable, Serializable {
+public final class Box<Value> implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 6227185449958370051L;
 

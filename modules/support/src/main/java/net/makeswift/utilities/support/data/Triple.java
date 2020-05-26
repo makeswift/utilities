@@ -5,7 +5,7 @@ import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
 
-public class Triple<First, Second, Third> implements Cloneable, Serializable {
+public final class Triple<First, Second, Third> implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 6242634213407249631L;
 
