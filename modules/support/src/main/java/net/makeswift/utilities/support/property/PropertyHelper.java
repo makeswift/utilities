@@ -14,14 +14,14 @@ public class PropertyHelper {
     public <Entity> int hashCode(Entity entity, Collection<? extends Property<Entity>> properties) {
         return Implementation.hashCode(
             ObjectHelper.notNull("entity", entity),
-            CollectionHelper.noNull("properties", ObjectHelper.notNull("properties", properties))
+            CollectionHelper.notNull("properties", properties)
         );
     }
 
     public <Entity> boolean equals(Entity entity, Collection<? extends Property<Entity>> properties, Object object) {
         return Implementation.equals(
             ObjectHelper.notNull("entity", entity),
-            CollectionHelper.noNull("properties", ObjectHelper.notNull("properties", properties)),
+            CollectionHelper.notNull("properties", properties),
             object
         );
     }
@@ -29,7 +29,7 @@ public class PropertyHelper {
     public <Entity> String toString(Entity entity, Collection<? extends Property<Entity>> properties) {
         return Implementation.toString(
             ObjectHelper.notNull("entity", entity),
-            CollectionHelper.noNull("properties", ObjectHelper.notNull("properties", properties))
+            CollectionHelper.notNull("properties", properties)
         );
     }
 
