@@ -6,14 +6,43 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("The 'hashCode' property helper")
 public class PropertyHelperHashCodeTest {
+
+    @Test
+    @DisplayName("fails if the passed entity is null")
+    public void failsIfThePassedEntityIsNull() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            PropertyHelper.equals(null, new LinkedList<>(), new Object());
+        });
+
+    }
+
+    @Test
+    @DisplayName("fails if the passed properties are null")
+    public void failsIfThePassedPropertiesAreNull() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            PropertyHelper.equals(new Object(), null, new Object());
+        });
+
+    }
+
+    @Test
+    @DisplayName("fails if the passed properties contain null")
+    public void failsIfThePassedPropertiesContainNull() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            PropertyHelper.equals(new Object(), Collections.singletonList(null), new Object());
+        });
+
+    }
 
     @Test
     @DisplayName("equals the hash code of an array when properties are not present")
