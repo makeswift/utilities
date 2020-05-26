@@ -1,11 +1,9 @@
 package net.makeswift.utilities.support.property;
 
-import lombok.Data;
 import net.makeswift.utilities.support.ObjectHelper;
 
 import java.util.function.Function;
 
-@Data
 public final class TypedProperty<Entity, Value> implements Property<Entity> {
 
     private static final Properties<Property<?>> PROPERTIES = new PropertiesBuilder<Property<?>>()
