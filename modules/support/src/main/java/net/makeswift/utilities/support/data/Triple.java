@@ -1,22 +1,19 @@
 package net.makeswift.utilities.support.data;
 
-import net.makeswift.utilities.support.property.Property;
-import net.makeswift.utilities.support.property.PropertyHelper;
-import net.makeswift.utilities.support.property.SimpleProperty;
+import net.makeswift.utilities.support.property.Properties;
+import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 
 public class Triple<First, Second, Third> implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 6242634213407249631L;
 
-    private static final List<Property<Triple<?, ?, ?>>> PROPERTIES = Arrays.asList(
-        new SimpleProperty<Triple<?, ?, ?>>("first", Triple::getFirst),
-        new SimpleProperty<Triple<?, ?, ?>>("second", Triple::getSecond),
-        new SimpleProperty<Triple<?, ?, ?>>("third", Triple::getThird)
-    );
+    private static final Properties<Triple<?, ?, ?>> PROPERTIES = new PropertiesBuilder<Triple<?, ?, ?>>()
+        .add("first", Triple::getFirst)
+        .add("second", Triple::getSecond)
+        .add("third", Triple::getThird)
+        .build();
 
     private final First first;
 
@@ -44,17 +41,17 @@ public class Triple<First, Second, Third> implements Cloneable, Serializable {
 
     @Override
     public int hashCode() {
-        return PropertyHelper.hashCode(this, PROPERTIES);
+        return PROPERTIES.hashCode(this);
     }
 
     @Override
     public boolean equals(Object object) {
-        return PropertyHelper.equals(this, PROPERTIES, object);
+        return PROPERTIES.equals(this, object);
     }
 
     @Override
     public String toString() {
-        return PropertyHelper.toString(this, PROPERTIES);
+        return PROPERTIES.toString(this);
     }
 
     @Override

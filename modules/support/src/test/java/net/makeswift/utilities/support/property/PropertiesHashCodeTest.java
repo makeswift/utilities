@@ -6,40 +6,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("The 'hashCode' property helper")
-public class PropertyHelperHashCodeTest {
+@DisplayName("A properties objects equals method")
+public class PropertiesHashCodeTest {
 
     @Test
     @DisplayName("fails if the passed entity is null")
     public void failsIfThePassedEntityIsNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(null, new LinkedList<>(), new Object());
-        });
-
-    }
-
-    @Test
-    @DisplayName("fails if the passed properties are null")
-    public void failsIfThePassedPropertiesAreNull() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(new Object(), null, new Object());
-        });
-
-    }
-
-    @Test
-    @DisplayName("fails if the passed properties contain null")
-    public void failsIfThePassedPropertiesContainNull() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(new Object(), Collections.singletonList(null), new Object());
+            new Properties<>(new LinkedList<>()).equals(null, new Object());
         });
 
     }
@@ -50,7 +32,7 @@ public class PropertyHelperHashCodeTest {
 
         List<Property<Pair<String>>> properties = new LinkedList<>();
 
-        int hash = PropertyHelper.hashCode(new Pair<>(null, null), properties);
+        int hash = new Properties<>(properties).hashCode(new Pair<>(null, null));
 
         assertEquals(Objects.hash(), hash);
 
@@ -65,7 +47,7 @@ public class PropertyHelperHashCodeTest {
         properties.add(new TypedProperty<>(firstName, Pair::getFirst));
         properties.add(new TypedProperty<>(secondName, Pair::getSecond));
 
-        int hash = PropertyHelper.hashCode(new Pair<>(firstValue, secondValue), properties);
+        int hash = new Properties<>(properties).hashCode(new Pair<>(firstValue, secondValue));
 
         assertEquals(Objects.hash(firstValue, secondValue), hash);
 
@@ -79,7 +61,7 @@ public class PropertyHelperHashCodeTest {
         properties.add(new TypedProperty<>("first", Pair::getFirst));
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
-        int hash = PropertyHelper.hashCode(new Pair<>(new Object() {
+        int hash = new Properties<>(properties).hashCode(new Pair<>(new Object() {
 
             @Override
             public int hashCode() {
@@ -91,7 +73,7 @@ public class PropertyHelperHashCodeTest {
             public int hashCode() {
                 return 42;
             }
-        }), properties);
+        }));
 
         assertEquals(Objects.hash(23, 42), hash);
 
@@ -106,7 +88,7 @@ public class PropertyHelperHashCodeTest {
         properties.add(new TypedProperty<>("first", Pair::getFirst));
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
-        int hash = PropertyHelper.hashCode(new Pair<>(null, null), properties);
+        int hash = new Properties<>(properties).hashCode(new Pair<>(null, null));
 
         assertEquals(Objects.hash(0, 0), hash);
 

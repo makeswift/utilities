@@ -1,21 +1,18 @@
 package net.makeswift.utilities.support.data;
 
-import net.makeswift.utilities.support.property.Property;
-import net.makeswift.utilities.support.property.PropertyHelper;
-import net.makeswift.utilities.support.property.SimpleProperty;
+import net.makeswift.utilities.support.property.Properties;
+import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 
 public class Tuple<First, Second> implements Cloneable, Serializable {
 
     private static final long serialVersionUID = -4461009431136919961L;
 
-    private static final List<Property<Tuple<?, ?>>> PROPERTIES = Arrays.asList(
-        new SimpleProperty<Tuple<?, ?>>("first", Tuple::getFirst),
-        new SimpleProperty<Tuple<?, ?>>("second", Tuple::getSecond)
-    );
+    private static final Properties<Tuple<?, ?>> PROPERTIES = new PropertiesBuilder<Tuple<?, ?>>()
+        .add("first", Tuple::getFirst)
+        .add("second", Tuple::getSecond)
+        .build();
 
     private final First first;
 
@@ -36,17 +33,17 @@ public class Tuple<First, Second> implements Cloneable, Serializable {
 
     @Override
     public int hashCode() {
-        return PropertyHelper.hashCode(this, PROPERTIES);
+        return PROPERTIES.hashCode(this);
     }
 
     @Override
     public boolean equals(Object object) {
-        return PropertyHelper.equals(this, PROPERTIES, object);
+        return PROPERTIES.equals(this, object);
     }
 
     @Override
     public String toString() {
-        return PropertyHelper.toString(this, PROPERTIES);
+        return PROPERTIES.toString(this);
     }
 
     @Override

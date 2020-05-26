@@ -1,17 +1,15 @@
 package net.makeswift.utilities.support.data;
 
-import net.makeswift.utilities.support.property.Property;
-import net.makeswift.utilities.support.property.PropertyHelper;
+import net.makeswift.utilities.support.property.Properties;
+import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
 
 public class Unit implements Comparable<Unit>, Cloneable, Serializable {
 
     private static final long serialVersionUID = -571480973265861585L;
 
-    private static final List<Property<Unit>> PROPERTIES = Collections.emptyList();
+    private static final Properties<Unit> PROPERTIES = new PropertiesBuilder<Unit>().build();
 
     private static final Unit INSTANCE = new Unit();
 
@@ -24,17 +22,17 @@ public class Unit implements Comparable<Unit>, Cloneable, Serializable {
 
     @Override
     public int hashCode() {
-        return PropertyHelper.hashCode(this, PROPERTIES);
+        return PROPERTIES.hashCode(this);
     }
 
     @Override
     public boolean equals(Object object) {
-        return PropertyHelper.equals(this, PROPERTIES, object);
+        return PROPERTIES.equals(this, object);
     }
 
     @Override
     public String toString() {
-        return PropertyHelper.toString(this, PROPERTIES);
+        return PROPERTIES.toString(this);
     }
 
     @Override
