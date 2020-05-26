@@ -7,14 +7,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Properties<Entity> {
 
     private static final Properties<Properties<?>> PROPERTIES = new PropertiesBuilder<Properties<?>>()
-        .add("properties", properties -> {
-            return properties.properties.stream().map(Property::getName).collect(Collectors.joining(", "));
-        })
+        .add("properties", properties -> CollectionHelper.toString(properties.properties, Property::getName))
         .build();
 
     private final List<Property<Entity>> properties;
