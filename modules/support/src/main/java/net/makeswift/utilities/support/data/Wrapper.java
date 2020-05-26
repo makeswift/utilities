@@ -1,20 +1,17 @@
 package net.makeswift.utilities.support.data;
 
-import net.makeswift.utilities.support.property.Property;
-import net.makeswift.utilities.support.property.PropertyHelper;
-import net.makeswift.utilities.support.property.SimpleProperty;
+import net.makeswift.utilities.support.property.Properties;
+import net.makeswift.utilities.support.property.PropertiesBuilder;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
 
 public class Wrapper<Value> implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 4354943973975212929L;
 
-    private static final List<Property<Wrapper<?>>> PROPERTIES = Collections.singletonList(
-        new SimpleProperty<Wrapper<?>>("value", Wrapper::get)
-    );
+    private static final Properties<Wrapper<?>> PROPERTIES = new PropertiesBuilder<Wrapper<?>>()
+        .add("value", Wrapper::get)
+        .build();
 
     private final Value value;
 
@@ -28,17 +25,17 @@ public class Wrapper<Value> implements Cloneable, Serializable {
 
     @Override
     public int hashCode() {
-        return PropertyHelper.hashCode(this, PROPERTIES);
+        return PROPERTIES.hashCode(this);
     }
 
     @Override
     public boolean equals(Object object) {
-        return PropertyHelper.equals(this, PROPERTIES, object);
+        return PROPERTIES.equals(this, object);
     }
 
     @Override
     public String toString() {
-        return PropertyHelper.toString(this, PROPERTIES);
+        return PROPERTIES.toString(this);
     }
 
     @Override

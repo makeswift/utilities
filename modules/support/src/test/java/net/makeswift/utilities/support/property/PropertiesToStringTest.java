@@ -6,43 +6,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("The 'toString' property helper")
-public class PropertyHelperToStringTest {
+@DisplayName("The properties objects toString method")
+public class PropertiesToStringTest {
 
     @Test
     @DisplayName("fails if the passed entity is null")
     public void failsIfThePassedEntityIsNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(null, new LinkedList<>(), new Object());
-        });
-
-    }
-
-    @Test
-    @DisplayName("fails if the passed properties are null")
-    public void failsIfThePassedPropertiesAreNull() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(new Object(), null, new Object());
-        });
-
-    }
-
-    @Test
-    @DisplayName("fails if the passed properties contain null")
-    public void failsIfThePassedPropertiesContainNull() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(new Object(), Collections.singletonList(null), new Object());
+            new Properties<>(new LinkedList<>()).equals(null, new Object());
         });
 
     }
@@ -53,7 +30,7 @@ public class PropertyHelperToStringTest {
 
         List<Property<Pair<String>>> properties = new LinkedList<>();
 
-        String string = PropertyHelper.toString(new Pair<>(null, null), properties);
+        String string = new Properties<>(properties).toString(new Pair<>(null, null));
 
         assertEquals("Pair []", string);
 
@@ -68,7 +45,7 @@ public class PropertyHelperToStringTest {
         properties.add(new TypedProperty<>(firstName, Pair::getFirst));
         properties.add(new TypedProperty<>(secondName, Pair::getSecond));
 
-        String string = PropertyHelper.toString(new Pair<>(firstValue, secondValue), properties);
+        String string = new Properties<>(properties).toString(new Pair<>(firstValue, secondValue));
 
         assertTrue(string.contains("[" + firstName + "=" + firstValue + ", " + secondName + "=" + secondValue + "]"));
 
@@ -82,7 +59,7 @@ public class PropertyHelperToStringTest {
         properties.add(new TypedProperty<>("first", Pair::getFirst));
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
-        String string = PropertyHelper.toString(new Pair<>(new Object() {
+        String string = new Properties<>(properties).toString(new Pair<>(new Object() {
 
             @Override
             public String toString() {
@@ -96,7 +73,7 @@ public class PropertyHelperToStringTest {
                 return "bar";
             }
 
-        }), properties);
+        }));
 
         assertEquals("Pair [first=foo, second=bar]", string);
 
@@ -110,7 +87,7 @@ public class PropertyHelperToStringTest {
         properties.add(new TypedProperty<>("first", Pair::getFirst));
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
-        String string = PropertyHelper.toString(new Pair<>(null, null), properties);
+        String string = new Properties<>(properties).toString(new Pair<>(null, null));
 
         assertEquals("Pair [first=null, second=null]", string);
 

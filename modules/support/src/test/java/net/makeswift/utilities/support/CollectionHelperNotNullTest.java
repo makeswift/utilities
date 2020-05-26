@@ -5,46 +5,45 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("The 'noNull' collection helper")
-public class CollectionHelperNoNullTest {
+@DisplayName("The 'notNull' collection helper")
+public class CollectionHelperNotNullTest {
 
     @Test
-    @DisplayName("returns the passed value when it is null")
-    public void returnsThePassedCollectionWhenItNull() {
-
-        Collection<Object> returnedCollection = CollectionHelper.noNull("collection", null);
-
-        assertNull(returnedCollection);
-
-    }
-
-    @Test
-    @DisplayName("returns the passed value when it is empty")
+    @DisplayName("returns the passed collection when it is empty")
     public void returnsThePassedCollectionWhenItIsEmpty() {
 
         Collection<Object> collection = Collections.emptyList();
 
-        Collection<Object> returnedCollection = CollectionHelper.noNull("collection", collection);
+        Collection<Object> returnedCollection = CollectionHelper.notNull("collection", collection);
 
         assertSame(collection, returnedCollection);
 
     }
 
     @Test
-    @DisplayName("returns the passed value when it contains no null")
+    @DisplayName("returns the passed collection when it contains no null")
     public void returnsThePassedCollectionWhenItContainsNoNull() {
 
         Collection<Object> collection = Collections.singletonList(new Object());
 
-        Collection<Object> returnedCollection = CollectionHelper.noNull("collection", collection);
+        Collection<Object> returnedCollection = CollectionHelper.notNull("collection", collection);
 
         assertSame(collection, returnedCollection);
+
+    }
+
+    @Test
+    @DisplayName("fails when the passed collection is null")
+    public void failsWhenTheCollectionIsNull() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            CollectionHelper.notNull("collection", null);
+        });
 
     }
 
@@ -53,7 +52,7 @@ public class CollectionHelperNoNullTest {
     public void failsWhenTheCollectionContainsNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            CollectionHelper.noNull("collection", Collections.singletonList(null));
+            CollectionHelper.notNull("collection", Collections.singletonList(null));
         });
 
     }
@@ -64,7 +63,7 @@ public class CollectionHelperNoNullTest {
     public void usesThePassedNameWhenThePassedCollectionContainsNull(String name) {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CollectionHelper.noNull(name, Collections.singletonList(null));
+            CollectionHelper.notNull(name, Collections.singletonList(null));
         });
 
         assertTrue(exception.getMessage().contains(name));
@@ -76,7 +75,7 @@ public class CollectionHelperNoNullTest {
     public void usesAGenericNameWhenThePassedValueIsNull() {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CollectionHelper.noNull(null, Collections.singletonList(null));
+            CollectionHelper.notNull(null, Collections.singletonList(null));
         });
 
         assertTrue(exception.getMessage().contains("value"));

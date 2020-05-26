@@ -6,14 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("The 'equals' property helper")
-public class PropertyHelperEqualsTest {
+@DisplayName("A properties objects equals method")
+public class PropertiesEqualsTest {
 
 
     @Test
@@ -21,27 +20,7 @@ public class PropertyHelperEqualsTest {
     public void failsIfThePassedEntityIsNull() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(null, new LinkedList<>(), new Object());
-        });
-
-    }
-
-    @Test
-    @DisplayName("fails if the passed properties are null")
-    public void failsIfThePassedPropertiesAreNull() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(new Object(), null, new Object());
-        });
-
-    }
-
-    @Test
-    @DisplayName("fails if the passed properties contain null")
-    public void failsIfThePassedPropertiesContainNull() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            PropertyHelper.equals(new Object(), Collections.singletonList(null), new Object());
+            new Properties<>(new LinkedList<>()).equals(null, new Object());
         });
 
     }
@@ -53,7 +32,7 @@ public class PropertyHelperEqualsTest {
         List<Property<Pair<String>>> properties = new LinkedList<>();
 
         Pair<String> pair = new Pair<>(null, null);
-        boolean result = PropertyHelper.equals(pair, properties, pair.clone());
+        boolean result = new Properties<>(properties).equals(pair, pair.clone());
 
         assertTrue(result);
     }
@@ -68,7 +47,7 @@ public class PropertyHelperEqualsTest {
         properties.add(new TypedProperty<>(secondName, Pair::getSecond));
 
         Pair<String> pair = new Pair<>(firstValue, secondValue);
-        boolean result = PropertyHelper.equals(pair, properties, pair.clone());
+        boolean result = new Properties<>(properties).equals(pair, pair.clone());
 
         assertTrue(result);
 
@@ -83,7 +62,7 @@ public class PropertyHelperEqualsTest {
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
         Pair<String> pair = new Pair<>(null, null);
-        boolean result = PropertyHelper.equals(pair, properties, pair.clone());
+        boolean result = new Properties<>(properties).equals(pair, pair.clone());
 
         assertTrue(result);
     }
@@ -97,7 +76,7 @@ public class PropertyHelperEqualsTest {
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
         Pair<String> pair = new Pair<>("first", "second");
-        boolean result = PropertyHelper.equals(pair, properties, pair);
+        boolean result = new Properties<>(properties).equals(pair, pair);
 
         assertTrue(result);
 
@@ -112,7 +91,7 @@ public class PropertyHelperEqualsTest {
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
         Pair<String> pair = new Pair<>("first", "second");
-        boolean result = PropertyHelper.equals(pair, properties, null);
+        boolean result = new Properties<>(properties).equals(pair, null);
 
         assertFalse(result);
 
@@ -127,7 +106,7 @@ public class PropertyHelperEqualsTest {
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
         Pair<String> pair = new Pair<>("first", "second");
-        boolean result = PropertyHelper.equals(pair, properties, new Object());
+        boolean result = new Properties<>(properties).equals(pair, new Object());
 
         assertFalse(result);
 
@@ -142,7 +121,7 @@ public class PropertyHelperEqualsTest {
         properties.add(new TypedProperty<>("second", Pair::getSecond));
 
         Pair<String> pair = new Pair<>("first", "second");
-        boolean result = PropertyHelper.equals(pair, properties, new Pair<>("foo", "bar"));
+        boolean result = new Properties<>(properties).equals(pair, new Pair<>("foo", "bar"));
 
         assertFalse(result);
 
